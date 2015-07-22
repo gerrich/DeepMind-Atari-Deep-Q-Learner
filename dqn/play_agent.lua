@@ -85,7 +85,7 @@ local screen, reward, terminal = game_env:getState()
 
 print("Iteration ..", step)
 local win = nil
-screen, reward, terminal = game_env:newGame()
+--screen, reward, terminal = game_env:newGame()
 
 total_reward = 0
 nrewards = 0

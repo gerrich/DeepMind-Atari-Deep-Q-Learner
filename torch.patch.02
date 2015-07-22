@@ -1,0 +1,29 @@
+diff -ur torch_git/share/lua/5.1/alewrap/AleRemote.lua torch/share/lua/5.1/alewrap/AleRemote.lua
+--- torch_git/share/lua/5.1/alewrap/AleRemote.lua	2015-07-23 02:48:39.289925611 +0300
++++ torch/share/lua/5.1/alewrap/AleRemote.lua	2015-07-23 00:15:43.556425613 +0300
+@@ -42,6 +42,8 @@
+ require 'torch'
+ local Env = torch.class('alewrap.AleRemoteEnv')
+ function Env:__init(host, port, romName, extraConfig)
++		self.ale_env = alewrap.createEnv(romName, extraConfig)
++    
+     self.config = {
+         -- An additional reward signal can be provided
+         -- after the end of one game.
+@@ -256,14 +258,7 @@
+ end
+ 
+ function Env:actions()
+-    --local nactions = self.ale:numActions()
+-    --local actions = torch.IntTensor(nactions)
+-    --self.ale:actions(torch.data(actions), actions:nElement())
+-    local actions = torch.IntTensor(18)
+-		for i = 1,18 do
+-			actions[i] = i - 1
+-		end
+-    return actions
++    return self.ale_env:actions()
+ end
+ 
+ function Env:lives()
+
